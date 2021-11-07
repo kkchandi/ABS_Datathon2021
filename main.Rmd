@@ -4,3 +4,45 @@ author: "Khushmeet Chandi, Athena Ru, Jason Ren"
 date: "November 6, 2021"
 output: pdf_document
 ---
+```{r packages, include=FALSE}
+#library(inspectdf)
+library(foreign)
+library(tidyverse)
+library(dplyr)
+library(haven)
+library(tidymodels)
+```
+```
+
+```{r reading-thailand-data}
+thailand <- read_sav("data/W1 Merged Data/Wave.1_Data/Thailand/Thailand v4.2.sav")
+thailand
+```
+
+```{r public-water-supply-data-thailand}
+thailand <- thailand %>%
+  drop_na(ir010b) %>%
+  filter(ir010b!=99)
+  
+ggplot(thailand, mapping=aes(ir010b)) +
+  geom_bar() +
+  labs(
+    title = "How do interviewees rate the sanitary condition in the public area
+            in their nearby neighborhood?",
+    x="Rating of the Sanitary Condition in the Public Area",
+    y="Frequency"
+  )
+```
+
+This dataset includes 1539 rows with 259 columns. This indicates that there were
+1539 survey respondents and 259 pieces of information collected from these
+respondents. The particular data that we are interested in in this study is the
+santiary conditions in the interviewees' nearby neighborhood. This data is 
+categorical. The santiary conditions will be compared to the avalaibiity of
+clean drinking water and electricity to determine the economic and public health
+conditions in the countries provided in the dataset. This will then be 
+analyzed and compared against the percieved economic condition in those countries,
+using the respondents' rating of how they view the economic condition in their
+country. In summary, this will provide insight into how the economic conditions
+of Asian countries compare to one another and how the countries' residents
+percieve these economic conditions. 
